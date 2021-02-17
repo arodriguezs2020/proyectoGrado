@@ -6,7 +6,9 @@ import java.util.function.Function;
 import org.jesuitasrioja.Reservas.modelo.reserva.Reserva;
 import org.jesuitasrioja.Reservas.modelo.reserva.ReservaDTO;
 import org.jesuitasrioja.Reservas.modelo.reserva.ReservaDTOConverter;
+import org.jesuitasrioja.Reservas.modelo.servicio.Servicio;
 import org.jesuitasrioja.Reservas.persistencia.services.ReservaService;
+import org.jesuitasrioja.Reservas.persistencia.services.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +30,9 @@ public class ReservaController {
 
 	@Autowired
 	private ReservaService rs;
+	
+	@Autowired
+	private ServicioService ss;
 	
 	@Autowired
 	ReservaDTOConverter reservaDTOConverter;
@@ -83,8 +88,27 @@ public class ReservaController {
 	@ApiOperation(value = "Añadir una reserva",
 			 notes = "Con este metodo conseguimos añadir una Reserva.")
 	@PostMapping("/reserva")
-	public String postReserva(@RequestBody Reserva nuevaReserva) {
-		return rs.save(nuevaReserva).toString();
+	public ResponseEntity<?> postReserva(@RequestBody Reserva nuevaReserva) {
+		
+		Reserva r = new Reserva();
+		r.setNombre(nuevaReserva.getNombre());
+		r.setApellidos(nuevaReserva.getApellidos());
+		r.setFecha(nuevaReserva.getFecha());
+		r.setHora(nuevaReserva.getHora());
+		r.setTelefono(nuevaReserva.getTelefono());
+		
+		Optional<Servicio> servicio = ss.findById(nuevaReserva.getServicio().getIdentificador());
+		
+		if (servicio.isPresent()) {
+			
+			r.setServicio(servicio.get());
+			rs.save(r);
+			
+			return ResponseEntity.status(HttpStatus.OK).body("");
+			
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El servicio mandado no existe");
+		}
 	}
 	
 	/*

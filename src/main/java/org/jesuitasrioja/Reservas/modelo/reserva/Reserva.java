@@ -32,9 +32,7 @@ public class Reserva implements Serializable{
 	@Include
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer identificador;
-	@Column(name = "nombre")
 	private String nombre;
-	@Column(name = "apellidos")
 	private String apellidos;
 	private String fecha;
 	private String hora;

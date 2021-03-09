@@ -15,9 +15,5 @@ public class ReservaDTO {
 	private String apellidos;
 	private String fecha;
 	private String hora;
-	private Integer servicioIdentificador;
-	private String servicioNombre;
-	private Double servicioPrecio;
-	private String telefono;
 	
 }

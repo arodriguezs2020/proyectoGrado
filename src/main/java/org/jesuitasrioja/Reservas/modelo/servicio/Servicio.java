@@ -25,5 +25,5 @@ public class Servicio implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer identificador;
 	private String nombre;
-	private Double precio;
+	private Integer precio;
 }

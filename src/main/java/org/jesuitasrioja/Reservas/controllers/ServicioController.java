@@ -52,7 +52,7 @@ public class ServicioController {
 	 */
 
 	@ApiOperation(value = "Obtener un servicio por identificador", notes = "Con este metodo conseguimos recoger la información de un servicio específico.")
-	@GetMapping("/servicio/{id}")
+	@GetMapping("/servicio/{nombre}")
 	public ResponseEntity<Servicio> getServicio(@PathVariable String nombre) {
 
 		Optional<Servicio> servicioOptional = ss.findById(nombre);
@@ -106,7 +106,7 @@ public class ServicioController {
 	 **/
 
 	@ApiOperation(value = "Borrar un servicio", notes = "Con este metodo conseguimos borrar un Servicio por identificador. De esta forma conseguiremos borrar un Servicio específico.")
-	@DeleteMapping("/servicio/{id}")
+	@DeleteMapping("/servicio/{nombre}")
 	public String deleteServicio(@PathVariable String nombre) {
 		ss.deleteById(nombre);
 		return "OK";

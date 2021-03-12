@@ -22,8 +22,6 @@ import lombok.EqualsAndHashCode.Include;
 public class Servicio implements Serializable{
 
 	@Id @Include
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer identificador;
 	private String nombre;
 	private String precio;
 }

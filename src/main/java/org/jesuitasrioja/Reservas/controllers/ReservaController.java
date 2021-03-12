@@ -97,7 +97,7 @@ public class ReservaController {
 		r.setHora(nuevaReserva.getHora());
 		r.setTelefono(nuevaReserva.getTelefono());
 		
-		Optional<Servicio> servicio = ss.findById(nuevaReserva.getServicio().getIdentificador());
+		Optional<Servicio> servicio = ss.findById(nuevaReserva.getServicio().getNombre());
 		
 		if (servicio.isPresent()) {
 			

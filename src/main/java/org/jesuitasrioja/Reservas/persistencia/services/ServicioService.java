@@ -5,6 +5,6 @@ import org.jesuitasrioja.Reservas.persistencia.repositories.ServicioRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServicioService extends BaseService<Servicio, Integer, ServicioRepository>{
+public class ServicioService extends BaseService<Servicio, String, ServicioRepository>{
 
 }

@@ -3,7 +3,9 @@ package org.jesuitasrioja.Reservas.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.jesuitasrioja.Reservas.modelo.reserva.Reserva;
 import org.jesuitasrioja.Reservas.modelo.servicio.Servicio;
+import org.jesuitasrioja.Reservas.persistencia.services.ReservaService;
 import org.jesuitasrioja.Reservas.persistencia.services.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +27,9 @@ public class ServicioController {
 
 	@Autowired
 	private ServicioService ss;
+	
+	@Autowired
+	private ReservaService rs;
 
 	/*
 	 * 
@@ -48,13 +53,13 @@ public class ServicioController {
 
 	@ApiOperation(value = "Obtener un servicio por identificador", notes = "Con este metodo conseguimos recoger la información de un servicio específico.")
 	@GetMapping("/servicio/{id}")
-	public ResponseEntity<Servicio> getServicio(@PathVariable Integer id) {
+	public ResponseEntity<Servicio> getServicio(@PathVariable String nombre) {
 
-		Optional<Servicio> servicioOptional = ss.findById(id);
+		Optional<Servicio> servicioOptional = ss.findById(nombre);
 		if (servicioOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(servicioOptional.get());
 		} else {
-			throw new ServicioNoEncontradoException(id);
+			throw new ServicioNoEncontradoException(nombre);
 		}
 	}
 
@@ -79,7 +84,19 @@ public class ServicioController {
 	@ApiOperation(value = "Modificar un servicio", notes = "Con este metodo conseguimos modificar un Servicio.")
 	@PutMapping("/servicio")
 	public String putServicio(@RequestBody Servicio editadoServicio) {
-		return ss.edit(editadoServicio).toString();
+		ss.edit(editadoServicio);
+		
+		List<Reserva> reservas = rs.findAll();
+		
+		for (Reserva reserva : reservas) {
+			Servicio servicio = reserva.getServicio();
+			if(servicio.getNombre().equals(editadoServicio.getNombre())) {
+				servicio.setPrecio(editadoServicio.getPrecio());
+			}
+		}
+		
+		
+		return "OK";
 	}
 
 	/*
@@ -90,8 +107,8 @@ public class ServicioController {
 
 	@ApiOperation(value = "Borrar un servicio", notes = "Con este metodo conseguimos borrar un Servicio por identificador. De esta forma conseguiremos borrar un Servicio específico.")
 	@DeleteMapping("/servicio/{id}")
-	public String deleteServicio(@PathVariable Integer id) {
-		ss.deleteById(id);
+	public String deleteServicio(@PathVariable String nombre) {
+		ss.deleteById(nombre);
 		return "OK";
 	}
 }

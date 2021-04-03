@@ -27,8 +27,6 @@ import lombok.NoArgsConstructor;
 public class UserEntity implements UserDetails {
 
 	@Id
-	private String id;
-
 	@Column(unique = true)
 	private String username;
 	private String password;

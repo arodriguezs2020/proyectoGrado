@@ -29,8 +29,7 @@ import lombok.NoArgsConstructor;
 public class UserEntity implements UserDetails {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private String id;
 
 	@Column(unique = true)
 	private String username;

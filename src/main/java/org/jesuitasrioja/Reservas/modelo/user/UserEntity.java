@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -27,6 +29,9 @@ import lombok.NoArgsConstructor;
 public class UserEntity implements UserDetails {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+
 	@Column(unique = true)
 	private String username;
 	private String password;

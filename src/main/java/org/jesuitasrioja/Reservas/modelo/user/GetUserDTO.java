@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class GetUserDTO {
+	private String id;
 	private String username;
 	private Set<String> roles;
 	private String telefono;

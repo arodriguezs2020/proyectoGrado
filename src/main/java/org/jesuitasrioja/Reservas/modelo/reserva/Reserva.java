@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.jesuitasrioja.Reservas.modelo.servicio.Servicio;
+import org.jesuitasrioja.Reservas.modelo.user.UserEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,5 +42,9 @@ public class Reserva implements Serializable{
 	private Servicio servicio;
 	
 	private String telefono;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "usuario")
+	private UserEntity usuario;
 	
 }

@@ -85,24 +85,6 @@ public class ReservaController {
 		}
 	}
 
-	/*
-	 * 
-	 * GET reserva/{idReserva}
-	 * 
-	 */
-
-	@ApiOperation(value = "Obtener una reserva por identificador", notes = "Con este metodo conseguimos recoger la información de una Reserva específica.")
-	@GetMapping("/reserva/user")
-	public ResponseEntity<List<Reserva>> getReservaDeUsuario() {
-
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails ud = (UserDetails) authentication.getPrincipal();
-
-		List<Reserva> reservasUser =  rs.getReservasUsuario(ud.getUsername());
-		
-		return ResponseEntity.status(HttpStatus.OK).body(reservasUser);
-		
-	}
 
 	/*
 	 * 

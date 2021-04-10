@@ -87,11 +87,11 @@ public class ReservaController {
 
 	/*
 	 * 
-	 * GET reserva/{idReserva}
+	 * GET reserva/user
 	 * 
 	 */
 
-	@ApiOperation(value = "Obtener una reserva por identificador", notes = "Con este metodo conseguimos recoger la información de una Reserva específica.")
+	@ApiOperation(value = "Obtener las reservas de un usuario", notes = "Con este metodo conseguimos recoger la información de varias Reservas de un Usuario.")
 	@GetMapping("/reserva/user")
 	public ResponseEntity<List<Reserva>> getReservaDeUsuario() {
 

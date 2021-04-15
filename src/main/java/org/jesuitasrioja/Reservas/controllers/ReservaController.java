@@ -126,6 +126,7 @@ public class ReservaController {
 		if (servicio.isPresent()) {
 
 			r.setServicio(servicio.get());
+			r.setUsuario(nuevaReserva.getUsuario());
 			rs.save(r);
 
 			return ResponseEntity.status(HttpStatus.OK).body("");

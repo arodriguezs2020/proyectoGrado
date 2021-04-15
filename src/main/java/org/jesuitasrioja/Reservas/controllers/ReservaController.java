@@ -8,8 +8,10 @@ import org.jesuitasrioja.Reservas.modelo.reserva.Reserva;
 import org.jesuitasrioja.Reservas.modelo.reserva.ReservaDTO;
 import org.jesuitasrioja.Reservas.modelo.reserva.ReservaDTOConverter;
 import org.jesuitasrioja.Reservas.modelo.servicio.Servicio;
+import org.jesuitasrioja.Reservas.modelo.user.UserEntity;
 import org.jesuitasrioja.Reservas.persistencia.services.ReservaService;
 import org.jesuitasrioja.Reservas.persistencia.services.ServicioService;
+import org.jesuitasrioja.Reservas.persistencia.services.UserEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +43,9 @@ public class ReservaController {
 
 	@Autowired
 	private ServicioService ss;
+	
+	@Autowired
+	private UserEntityService us;
 
 	@Autowired
 	ReservaDTOConverter reservaDTOConverter;
@@ -122,11 +127,13 @@ public class ReservaController {
 		r.setTelefono(nuevaReserva.getTelefono());
 
 		Optional<Servicio> servicio = ss.findById(nuevaReserva.getServicio().getNombre());
-
-		if (servicio.isPresent()) {
+		Optional<UserEntity> usuario = us.findById(nuevaReserva.getUsuario().getId());
+		
+		if (servicio.isPresent() && usuario.isPresent()) {
 
 			r.setServicio(servicio.get());
-			r.setUsuario(nuevaReserva.getUsuario());
+			r.setUsuario(usuario.get());
+			
 			rs.save(r);
 
 			return ResponseEntity.status(HttpStatus.OK).body("");

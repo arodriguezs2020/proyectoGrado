@@ -109,7 +109,7 @@ public class ServicioController {
 
 	@ApiOperation(value = "Borrar un servicio", notes = "Con este metodo conseguimos borrar un Servicio por identificador. De esta forma conseguiremos borrar un Servicio específico.")
 	@DeleteMapping("/servicio/{nombre}")
-	public ResponseEntity<Servicio> deleteServicio(@PathVariable String nombre) {
+	public ResponseEntity<?> deleteServicio(@PathVariable String nombre) {
 		ss.deleteById(nombre);
 		return ResponseEntity.status(HttpStatus.OK).body(ss.findById(nombre).get());
 	}

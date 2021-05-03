@@ -151,8 +151,8 @@ public class ReservaController {
 
 	@ApiOperation(value = "Modificar una reserva", notes = "Con este metodo conseguimos modificar una Reserva.")
 	@PutMapping("/reserva")
-	public String putReserva(@RequestBody Reserva editadaReserva) {
-		return rs.edit(editadaReserva).toString();
+	public ResponseEntity<?> putReserva(@RequestBody Reserva editadaReserva) {
+		return  ResponseEntity.status(HttpStatus.OK).body(rs.edit(editadaReserva));
 	}
 
 	/*

@@ -86,8 +86,8 @@ public class ServicioController {
 
 	@ApiOperation(value = "Modificar un servicio", notes = "Con este metodo conseguimos modificar un Servicio.")
 	@PutMapping("/servicio")
-	public String putServicio(@RequestBody Servicio editadoServicio) {
-		ss.edit(editadoServicio);
+	public ResponseEntity<Servicio> putServicio(@RequestBody Servicio editadoServicio) {
+		
 		
 		List<Reserva> reservas = rs.findAll();
 		
@@ -99,7 +99,7 @@ public class ServicioController {
 		}
 		
 		
-		return "OK";
+		return ResponseEntity.status(HttpStatus.OK).body(ss.edit(editadoServicio));
 	}
 
 	/*

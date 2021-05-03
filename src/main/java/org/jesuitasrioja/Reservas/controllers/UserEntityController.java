@@ -100,8 +100,8 @@ public class UserEntityController {
 	 */
 
 	@PutMapping("/usuario")
-	public String putUsuario(@RequestBody UserEntity editadoUsuario) {
-		return ues.edit(editadoUsuario).toString();
+	public ResponseEntity<UserEntity> putUsuario(@RequestBody UserEntity editadoUsuario) {
+		return ResponseEntity.status(HttpStatus.OK).body(ues.edit(editadoUsuario));
 	}
 
 	/*

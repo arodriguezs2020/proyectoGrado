@@ -98,7 +98,6 @@ public class ServicioController {
 			}
 		}
 		
-		
 		return ResponseEntity.status(HttpStatus.OK).body(ss.edit(editadoServicio));
 	}
 

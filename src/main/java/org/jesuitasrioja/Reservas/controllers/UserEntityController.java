@@ -111,8 +111,8 @@ public class UserEntityController {
 	 **/
 
 	@DeleteMapping("/usuario/{id}")
-	public String deleteUsuario(@PathVariable String id) {
+	public ResponseEntity<UserEntity> deleteUsuario(@PathVariable String id) {
 		ues.deleteById(id);
-		return "OK";
+		return ResponseEntity.status(HttpStatus.OK).body(ues.findById(id).get());
 	}
 }

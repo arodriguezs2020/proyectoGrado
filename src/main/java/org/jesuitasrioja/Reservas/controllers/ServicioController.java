@@ -74,8 +74,8 @@ public class ServicioController {
 
 	@ApiOperation(value = "Añadir un servicio", notes = "Con este metodo conseguimos añadir un servicio.")
 	@PostMapping("/servicio")
-	public String postServicio(@RequestBody Servicio nuevoServicio) {
-		return ss.save(nuevoServicio).toString();
+	public ResponseEntity<Servicio> postServicio(@RequestBody Servicio nuevoServicio) {
+		return ResponseEntity.status(HttpStatus.OK).body(ss.save(nuevoServicio));
 	}
 
 	/*

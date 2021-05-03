@@ -163,8 +163,8 @@ public class ReservaController {
 
 	@ApiOperation(value = "Borrar una reserva", notes = "Con este metodo conseguimos borrar una Reserva por identificador. De esta forma conseguiremos borrar una Reserva específica.")
 	@DeleteMapping("/reserva/{id}")
-	public String deleteReserva(@PathVariable Integer id) {
+	public ResponseEntity<Reserva> deleteReserva(@PathVariable Integer id) {
 		rs.deleteById(id);
-		return "OK";
+		return ResponseEntity.status(HttpStatus.OK).body(rs.findById(id).get());
 	}
 }
